@@ -550,7 +550,7 @@ export function OnchainView({ workspace, onOpen, onNavigate, dataset }: PanelPro
       <section className="panel" style={{ marginTop: "20px" }}>
         <div className="panel-heading">
           <div>
-            <h2>Reconstructed monthly stablecoin settlement (Thesis §3) [verified]</h2>
+            <h2>Reconstructed Monthly Settlements (Thesis §3) [verified]</h2>
             <p>Sum of 9 confirmed 6-decimal USD contracts into intents.near from BigQuery ft_events. No price feed required.</p>
           </div>
           <span className="badge green">$11.22B cumulative floor</span>

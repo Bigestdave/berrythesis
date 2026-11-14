@@ -35,7 +35,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <script src="/demo-director.js" defer />
+      </body>
     </html>
   );
 }
