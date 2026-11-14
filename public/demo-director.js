@@ -64,23 +64,15 @@
     + '.drip{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25);animation:drip .62s ease-out forwards}'
     + '@keyframes drip{from{transform:scale(.5);opacity:.9}to{transform:scale(3.4);opacity:0}}'
     + '#dsb{position:absolute;width:3px;border-radius:2px;background:rgba(242,65,107,.85);box-shadow:0 0 8px rgba(242,65,107,.5);opacity:0;transition:opacity .3s}#dsb.on{opacity:1}'
-    + '#dcount{position:fixed;left:50%;top:28px;transform:translateX(-50%);padding:10px 24px;border-radius:999px;background:rgba(0,0,0,.85);border:1px solid #333;color:#ededed;font:600 15px system-ui,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,.6);display:none;z-index:2147483647;backdrop-filter:blur(8px)}'
-    + '#dpill{position:fixed;bottom:24px;right:24px;z-index:2147483640;background:#111;color:#ededed;border:1px solid #333;padding:10px 18px;border-radius:24px;font:500 13px system-ui,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,.6);cursor:pointer;display:flex;align-items:center;gap:8px;pointer-events:auto;transition:all .2s}'
-    + '#dpill:hover{background:#1a1a1a;border-color:#f2416b}'
-    + '#dpill.on{border-color:#f2416b;background:#161616}'
-    + '#dpill-dot{width:7px;height:7px;border-radius:50%;background:#f2416b;box-shadow:0 0 8px #f2416b}';
+    + '#dcount{position:fixed;left:50%;top:28px;transform:translateX(-50%);padding:10px 24px;border-radius:999px;background:rgba(0,0,0,.85);border:1px solid #333;color:#ededed;font:600 15px system-ui,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,.6);display:none;z-index:2147483647;backdrop-filter:blur(8px)}';
 
   function later(f, ms) { dT.push(setTimeout(f, ms)); }
   function stopSteps() { dT.forEach(clearTimeout); dT = []; cancelAnimationFrame(raf); }
   function ov(sel) {
     if (!fx || !fx.isConnected) {
       fx = document.createElement('div'); fx.id = 'dfx';
-      fx.innerHTML = '<style>' + CSS + '</style><div id="ddot"><i></i></div><div id="dsb"></div><div id="dcount"></div><div id="dpill"><span id="dpill-dot"></span><span id="dpill-text">▶ Start Demo (Press D)</span></div>';
+      fx.innerHTML = '<style>' + CSS + '</style><div id="ddot"><i></i></div><div id="dsb"></div><div id="dcount"></div>';
       document.body.appendChild(fx);
-      fx.querySelector('#dpill').addEventListener('click', function (e) {
-        e.stopPropagation();
-        if (isRunning) stop(); else start();
-      });
     }
     return fx.querySelector(sel);
   }
@@ -213,16 +205,14 @@
     isRunning = false;
     stopSteps(); mT.forEach(clearTimeout); mT = []; clearInterval(cd);
     rest();
-    var cnt = ov('#dcount'), pill = ov('#dpill'), txt = ov('#dpill-text');
+    var cnt = ov('#dcount');
     if (cnt) cnt.style.display = 'none';
-    if (pill) pill.classList.remove('on');
-    if (txt) txt.textContent = '▶ Start Demo (Press D)';
   }
 
   function start() {
     stop();
     isRunning = true;
-    var base = SCRIPT[0].at, n = 5, cnt = ov('#dcount'), pill = ov('#dpill'), txt = ov('#dpill-text');
+    var base = SCRIPT[0].at, n = 5, cnt = ov('#dcount');
     var e = SCRIPT[0].screen && find(SCRIPT[0].screen.toLowerCase());
     if (e) {
       e.click();
@@ -230,9 +220,6 @@
     }
     window.scrollTo(0, 0);
     var sc = scroller(); if (sc) sc.scrollTop = 0;
-
-    pill.classList.add('on');
-    txt.textContent = 'Demo Running (Esc to stop)';
 
     cnt.style.display = 'block'; cnt.textContent = 'Starting in ' + n + '… (Start voiceover at GO)';
     cd = setInterval(function () {
@@ -264,7 +251,6 @@
   });
 
   window.demo = { start: start, stop: stop, SCRIPT: SCRIPT };
-  ov('#dpill'); // initialize floating trigger button immediately
 
   if (/[?&]demo=1\b/.test(location.search)) {
     if (document.readyState === 'complete') setTimeout(start, 1200);
