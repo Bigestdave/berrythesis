@@ -1,51 +1,62 @@
 # Berry Thesis · NEAR Protocol
 
-> Evidence before conviction. A working research document, not investment advice.
+> A long-term case for NEAR as a settlement business: what's verified, what has to be true, and what would prove it wrong.
+
+## Long-term case
+
+NEAR's strongest long-term argument is not the L1; it is a settlement business. Intents has moved at least $11.22B of stablecoins through intents.near since January 2025, and NEAR keeps a slice of it. If that slice grows and is valued as recurring settlement revenue instead of cyclical crypto fees, NEAR is a different business from the one the usage data describes. Today's price already assumes a lot (151× sales), so the position is conditional: size it by a risk budget, add only on a capture inflection or a sub-100× multiple, and exit if net revenue misses +50% in four quarters.
+
+## Value chain
+
+How the rail connects to NEAR holders:
+
+```
+Intents volume ($11.22B verified floor)
+  → Gross fee ~15.9 bps (~$61M cumulative) [reported]
+    → Protocol capture ~28–30% [reported]
+      → Retained take ~3–5 bps (~$11.7M net) [reported]
+        → Buybacks <25% of issuance, held not burned [reported]
+          → NEAR holders
+```
+
+Every link after verified volume is reported, not independently verified. The retained take is the number to watch.
 
 ## Working question
 
-Can NEAR turn network utility into long-term value?
+Can the slice NEAR keeps from its Intents settlement rail be valued as recurring, asset-light settlement revenue — the reclassification that re-rated Visa, LSEG, and ICE?
 
-The final investment argument is intentionally open. No price target, forecast return, or bullish/bearish conclusion has been validated.
+## The case for
 
-## The potential case
+- $11.22B verified stablecoin settlement floor into intents.near across nine confirmed 6-decimal USD contracts (29.3% of the $38.26B NEAR reports).
+- Price-free rail activity: stable settlements per day stepped from 4,600 (Jun–Jul 26) to 8,622/day (Nov 1–11).
+- Intents share of L1 transactions rose from 0.9% (Mar-26) to 17.0% (Nov 1–11), with 147 median daily callers.
+- Protocol capture climbing: retained take expanded 11.5% → 16.4% → ~28–30%.
+- Historical comparables (Visa, LSEG, ICE, AWS) show markets pay the highest multiples for recurring, asset-light tolls without credit risk.
 
-NEAR’s chain abstraction and developer infrastructure offer a testable route toward broader adoption. The research should look for repeat usage, application diversity, and sustainable token demand—not merely high transaction counts. This is a research direction, not an established finding.
+## The case against
 
-## The counter-case
-
-Network usage does not automatically create value for the NEAR token. Subsidized transactions, concentrated application activity, low fees, and competition may weaken the case. Price and USD TVL can rise without organic user growth.
+- No detectable lead from flow to network usage (permutation p = 0.44–0.75) or to token price (monthly r = −0.24, p = 0.31). Sample sizes are small (~22 months, ~94 weeks), so this fails to detect a lead rather than proving absence.
+- The L1 is shrinking: daily active accounts down −74% YoY. The settlement rail carries the entire investment thesis with no second engine.
+- Returns are concentrated: +251% since the fee switch, but September 2026 alone supplies 81% of the gain (Sharpe without it: 0.36).
+- Moat is unproven: intent routing is commoditised today (Across ran 10–15 bps with $0 capture).
+- Valuation needs a lot to be true: at 151× run-rate sales, a Visa-like 15× multiple needs revenue to grow tenfold.
 
 ## What would change the argument
 
-Revisit the thesis if repeat usage declines across two consecutive quarters, activity stays concentrated in subsidized applications, or network growth fails to generate measurable token demand. Finalize definitions and thresholds before evaluating the results.
+1. Net revenue (not volume) fails to grow ≥ 50% over four quarters → thesis is dead.
+2. Protocol capture falls below 15% for two consecutive months → abandon.
+3. Stable settlement $/day below own 6-month average for two months → exit.
+4. Accumulate only on: capture ≥ 25% for two months (growth trigger) or P/S ≤ 100× (valuation trigger).
 
-## Evidence available in the application
+## Evidence and reproducibility
 
-- **CoinGecko:** timestamped NEAR spot price, market capitalization, 24-hour trading volume, and daily history. The initial real provider payload is in `src/data/market-snapshot.json`; later refreshes are retained in the workspace’s PostgreSQL snapshot.
-- **DefiLlama:** historical NEAR-chain TVL. Liquid staking and double-counted TVL are excluded by the provider. USD TVL is price-sensitive and is not a measure of distinct users.
-- **NEAR BigQuery:** three partition-filtered query templates are provided in `research/queries`. They have not been automatically executed. Query costs are billed to your Google Cloud project. Daily result imports are explicitly marked user-provided, not independently verified.
-- **NEAR Intents:** aggregate volume is not computed. The Explorer API requires a partner JWT and complete, rate-limited pagination. Its coverage is historical 1Click swap transactions, not all network economic activity. No sample volume is represented as real data.
+- **BigQuery:** Three partition-filtered SQL queries for ft_events (stablecoin settlement), transactions (L1 usage), and contract ranking. Results committed to `src/data/`.
+- **Archival RPC:** ft_metadata + ft_total_supply probe verified all nine contracts as 6-decimal USD.
+- **Binance klines:** 682 daily closes for return, volatility, and lead-lag analysis.
+- **CoinGecko + DefiLlama:** Market snapshot (price, cap, volume, TVL).
+- **Intents Explorer API:** Not run (requires partner JWT). BigQuery ft_events used instead — it covers all token types, not only 1Click swaps.
 
-## Measurement limitations
-
-- A transaction signer is an account, not a unique person.
-- Submitted transaction counts are not successful transaction counts.
-- Receipt function calls can include cross-contract activity; callers are not necessarily end users.
-- Returning signers are observed within the chosen date window, not over their complete lifetime.
-- Correlated price and TVL movements do not establish causality or token value accrual.
-- Indexing series to 100 compares relative movement, not absolute scale. Missing TVL dates remain missing.
-- The snapshot’s fetch timestamp differs from each provider’s observation timestamp.
-
-## Reproduce
-
-Run `node scripts/rebuild.mjs` from the project root to fetch and validate public market inputs. The charts are deterministic transformations of those raw observations. This produces the bundled snapshot used to initialize a fresh workspace; use **Re-run data** in the application to refresh its current database-backed snapshot.
-
-Optional server environment variable: `COINGECKO_API_KEY` (CoinGecko Demo API key). Public access is used when no key is set; provider rate limits may apply. Source failures preserve the last successful database snapshot.
-
-Use the date controls in the SQL dialog, inspect the full query, run it in a billing-enabled Google Cloud project, and import the real daily result JSON into On-chain analytics. Both dates must be explicit; the end date is exclusive.
-
-Download **THESIS.md** inside the application for the current, editable version of this document. CSV exports contain chart observations. JSON evidence bundles include the raw market payload, queries, research notes, source references, imported results, and revision history.
+Every verified number regenerates with one command: `./rebuild.sh`
 
 ## Sources
 

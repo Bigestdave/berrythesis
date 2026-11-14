@@ -40,7 +40,7 @@ export function ThesisGlance({ workspace, onOpen, onNavigate }: PanelProps) {
         </div>
         <div>
           <span>Core thesis</span>
-          <strong>Short Its Own Take Rate</strong>
+          <strong>Settlement Business Case</strong>
         </div>
         <div>
           <span>Verified floor</span>
@@ -51,8 +51,8 @@ export function ThesisGlance({ workspace, onOpen, onNavigate }: PanelProps) {
           <strong className="badge purple">{workspace.thesis.stance}</strong>
         </div>
         <div>
-          <span>Valuation stance</span>
-          <strong className="negative">Do not add at $3.45 (151× sales)</strong>
+          <span>Position sizing</span>
+          <strong>Risk-budget conditional</strong>
         </div>
       </div>
       <div className="glance-principle">
@@ -109,9 +109,9 @@ export function SourcePanel({ onOpen }: { onOpen: (dialog: DialogState) => void 
 
 export function ResearchFocus({ onNavigate }: { onNavigate: (section: Section) => void }) {
   const items = [
-    { icon: Scale, name: "Short its own take rate", text: "Can retained take expand from 3 bps toward Visa's 30 bps band on an asset-light rail?", section: "thesis" as Section, style: "lavender" },
+    { icon: Scale, name: "A settlement business", text: "Can the slice NEAR keeps from its Intents rail be valued as recurring settlement revenue?", section: "thesis" as Section, style: "lavender" },
     { icon: Network, name: "Verified $11.22B floor", text: "Independent reconstruction across 9 confirmed 6-decimal USD contracts from BigQuery.", section: "onchain" as Section, style: "mint" },
-    { icon: TrendingDown, name: "Shrinking L1 vs growing rail", text: "Daily active accounts down -74% YoY while Intents share of L1 surged from 0.9% to 17.0%.", section: "market" as Section, style: "sand" },
+    { icon: TrendingDown, name: "What has to be true", text: "The L1 is shrinking. The rail carries the entire case. Every link after volume is reported.", section: "market" as Section, style: "sand" },
   ];
   return (
     <section className="research-focus">
@@ -144,15 +144,15 @@ export function Overview({ workspace, onOpen, onNavigate, onRefresh, refreshing 
           <div className="hero-eyebrow">
             <FlaskConical size={13} />
             <span>INVESTMENT THESIS V5</span>
-            <span className="hero-version">REPRODUCIBLE RESEARCH</span>
+            <span className="hero-version">LONG-TERM CASE</span>
           </div>
-          <h2>NEAR: Short Its Own Take Rate</h2>
-          <p>A long-horizon investment thesis on NEAR Protocol, built backwards from documented, on-chain-verified revenue.</p>
+          <h2>NEAR as a Settlement Business</h2>
+          <p>A long-term case for NEAR: what's verified, what has to be true, and what would prove it wrong.</p>
           <div className="hero-tags">
             <span><i />$11.22B Verified Floor</span>
             <span><i />15.9 bps Gross / ~3–5 bps Retained</span>
-            <span><i />Permutation Null Holds</span>
-            <span><i />Do Not Add at $3.45</span>
+            <span><i />Conditional at 151× Sales</span>
+            <span><i />Reproducible Evidence</span>
           </div>
         </div>
         <div className="hero-art" aria-hidden="true">
@@ -194,7 +194,7 @@ export function Overview({ workspace, onOpen, onNavigate, onRefresh, refreshing 
 
       <div className="overview-footnote">
         <ShieldCheck size={13} />
-        <span>NEAR Investment Thesis v5. Not investment advice. Every on-chain figure traces to first-party queries.</span>
+        <span>NEAR Investment Thesis v5 — a long-term case for NEAR as a settlement business. Not investment advice.</span>
         <button onClick={() => onNavigate("methodology")}>Full methodology & reproducibility <ArrowUpRight size={12} /></button>
       </div>
     </div>
@@ -213,9 +213,9 @@ export function ThesisView({ workspace, onOpen, onNavigate }: PanelProps) {
 
       {/* Hero Question */}
       <section className="thesis-question-card">
-        <div className="eyebrow"><FlaskConical size={14} />THE CORE FALSIFIABLE CLAIM</div>
-        <h2>NEAR is short its own take rate.</h2>
-        <p>The investable question is whether the protocol's retained take gets re-classified from "cyclical crypto transaction fees" to "recurring, asset-light settlement revenue" — the reclassification that re-rated Visa, LSEG and ICE.</p>
+        <div className="eyebrow"><FlaskConical size={14} />THE LONG-TERM CASE</div>
+        <h2>NEAR is a settlement business.</h2>
+        <p>The investable question is whether the slice NEAR keeps from its Intents rail gets valued as recurring settlement revenue — the reclassification that re-rated Visa, LSEG, and ICE. Today's price assumes a lot, so the position is conditional.</p>
       </section>
 
       {/* Case vs Counter-Case */}
@@ -238,8 +238,8 @@ export function ThesisView({ workspace, onOpen, onNavigate }: PanelProps) {
           <div className="thesis-card-heading">
             <span className="focus-icon sand"><TriangleAlert size={19} /></span>
             <div>
-              <span className="eyebrow">THE EVIDENCE AGAINST</span>
-              <h2>What we must not ignore</h2>
+              <span className="eyebrow">WHAT HAS TO BE TRUE</span>
+              <h2>Conditions and open risks</h2>
             </div>
           </div>
           <div style={{ whiteSpace: "pre-line", fontSize: "13.5px", lineHeight: "1.65", color: "var(--text)" }}>
@@ -707,8 +707,8 @@ export function MethodologyView({ workspace, onOpen }: PanelProps) {
       <section className="panel" style={{ marginTop: "20px" }}>
         <div className="panel-heading">
           <div>
-            <h2>The Null Result: Permutation Lead-Lag Testing (Thesis §7) [verified]</h2>
-            <p>10,000 shuffles with fixed seed. Decision rule: flow can only lead if p &lt; 0.05 at lag +1. None did.</p>
+            <h2>Permutation Lead-Lag Testing (Thesis §7) [verified]</h2>
+            <p>10,000 shuffles with fixed seed. Decision rule: flow can only lead if p &lt; 0.05 at lag +1. None did. Sample sizes are small, so this fails to detect a lead rather than proving absence.</p>
           </div>
           <span className="badge neutral">Null kept on purpose</span>
         </div>
@@ -737,7 +737,7 @@ export function MethodologyView({ workspace, onOpen }: PanelProps) {
           </table>
         </div>
         <div className="card-bottom-caption">
-          <Info size={12} /> Conclusion: Flow does NOT lead network usage or token price. Any backtest trading flow is fitting noise.
+          <Info size={12} /> Conclusion: No detectable lead from flow to network usage or token price at these sample sizes. Any backtest trading flow is fitting noise.
         </div>
       </section>
 

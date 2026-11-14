@@ -1,81 +1,79 @@
-# Berry Thesis: NEAR Protocol Investment Research (v5)
+# Berry Thesis: NEAR as a Settlement Business (v5)
 
-> **"NEAR is short its own take rate."**  
-> A long-horizon investment thesis on NEAR Protocol, built backwards from documented, on-chain-verified revenue. Hackathon Submission v5.
+> A long-term case for NEAR: what's verified, what has to be true, and what would prove it wrong.
 
-Live Workspace: [https://github.com/Bigestdave/berrythesis](https://github.com/Bigestdave/berrythesis)  
+Live Workspace: [https://github.com/Bigestdave/berrythesis](https://github.com/Bigestdave/berrythesis)
 Author: David Olabowale (Independent Researcher)
 
 ---
 
-## Executive Summary
+## Long-Term Case
 
-NEAR is valued by the market as a declining L1 and the NEAR Intents settlement rail at approximately zero. Inside that classification sits a settlement and routing rail that has moved **\$11.22B of independently verified stablecoin throughput** across nine 6-decimal USD contracts, earns **~15.9 bps gross / ~3–5 bps retained take**, and carries **zero balance-sheet risk**. 
+NEAR's strongest long-term argument is not the L1; it is a settlement business. Intents has moved at least **\$11.22B of independently verified stablecoin throughput** across nine 6-decimal USD contracts, and NEAR keeps a slice of it. If that slice grows and is valued as recurring settlement revenue instead of cyclical crypto fees, NEAR is a different business from the one the usage data describes.
 
-The investable question is whether the retained take on that rail gets re-classified by financial markets from "cyclical crypto transaction fees" to "recurring, asset-light settlement revenue" (the reclassification that re-rated Visa, LSEG, and ICE).
+Today's price already assumes a lot (151× sales), so the position is conditional: size it by a risk budget, add only on a capture inflection or a sub-100× multiple, and exit if net revenue misses +50% in four quarters.
 
-### Key Verified Findings
+### Value Chain: How the Rail Connects to NEAR Holders
 
-| Metric | Figure | Provenance / Verification |
+```
+Intents volume ($11.22B verified floor)
+  → Gross fee ~15.9 bps (~$61M cumulative) [reported]
+    → Protocol capture ~28–30% [reported]
+      → Retained take ~3–5 bps (~$11.7M net) [reported]
+        → Buybacks <25% of issuance, held not burned [reported]
+          → NEAR holders
+```
+
+Every link after verified volume is reported, not independently verified. The retained take is the number to watch.
+
+### Key Findings
+
+| Metric | Figure | Provenance |
 |---|---|---|
-| **Verified Stable Floor** | **\$11.22B** | Reconstructed from BigQuery `ft_events` (29.3% of \$38.26B reported volume) |
-| **Confirmed USD Contracts** | **9 contracts** | Archival RPC probe (`ft_metadata` + `ft_total_supply`); all confirmed 6-dec USD |
-| **Gross Take Rate** | **15.9 bps** | ~$61M cumulative gross fees on routed volume |
-| **Retained Take Rate** | **3.05 bps** | Protocol capture climbing 11.5% → 16.4% → ~28–30% (~$11.7M net revenue) |
-| **Price-Free Rail Activity** | **8,622 / day** | Nov 1–11 daily stable settlements (stepped up from 4,600 in Jun-Jul 2026) |
-| **Intents Share of L1** | **17.0%** | Nov 1–11 transactions (up from 0.9% in Mar-26); 147 median daily callers |
-| **L1 Active Accounts** | **-74% YoY** | 72,046 in Oct-26 vs 273,739 in Oct-25 (-92% vs Jan-25 882k) |
-| **The Null Result** | **Holds** | 10,000-shuffle permutation tests confirm flow does NOT lead usage (p=0.44–0.75) or price |
-| **Return Since Fee Switch** | **+251%** | 108% volatility, Sharpe 1.62, max DD -43.6%; Sep-2026 supplies 81% of gain |
-| **Stance & Verdict** | **Under review** | Do not add at \$3.45 (151× sales); accumulate on rules-based triggers (Capture ≥25% or P/S ≤100×) |
+| **Verified Stable Floor** | **\$11.22B** | Reconstructed from BigQuery `ft_events` (29.3% of \$38.26B reported) |
+| **Confirmed USD Contracts** | **9 contracts** | Archival RPC probe (`ft_metadata` + `ft_total_supply`) |
+| **Gross Take Rate** | **15.9 bps** | ~\$61M cumulative gross fees on routed volume |
+| **Retained Take Rate** | **~3–5 bps** | Protocol capture climbing 11.5% → 16.4% → ~28–30% |
+| **Price-Free Rail Activity** | **8,622/day** | Nov 1–11 stable settlements (up from 4,600 in Jun-Jul) |
+| **Intents Share of L1** | **17.0%** | Nov 1–11 transactions (up from 0.9% in Mar-26) |
+| **L1 Active Accounts** | **−74% YoY** | 72k Oct-26 vs 273k Oct-25 |
+| **Lead-Lag Testing** | **No detectable lead** | 10,000-shuffle permutation tests; small samples fail to detect, not prove absence |
+| **Return Since Fee Switch** | **+251%** | 108% vol, Sharpe 1.62; Sep-2026 supplies 81% of gain |
+| **Stance** | **Conditional** | Size by risk budget; add on capture inflection or P/S ≤ 100× |
 
 ---
 
-## Project Architecture & Features
+## Project Architecture
 
-This repository pairs the rigorous research paper with an interactive, institutional-grade analytics interface:
+This repository pairs the research with an interactive analytics interface:
 
-- **Vercel Pitch-Black Design System**: Built with clean neutral borders (`#1f1f1f`), pitch-black canvas (`#000000`), Geist Sans, Geist Mono, and DM Sans typography, and subtle berry-red accents (`#f2416b`).
-- **7 Dedicated Analytical Views**:
-  - `Overview`: Working thesis question, verified settlement metrics, market snapshot, performance chart, and comparables glance.
-  - `On-chain Analytics`: 680-day interactive BigQuery L1 usage chart, reconstructed monthly settlements table (§3), confirmed 9 contracts table with RPC float data (§4).
-  - `Market Analysis`: CoinGecko spot data, TVL trends, 151× P/S run-rate context, and Sum-of-the-Parts (SOTP) valuation model.
-  - `Investment Thesis`: Full claim, Evidence For vs Evidence Against, Measured Performance Table (§12), Scenario Matrix (§12), Position Sizing by Risk Budget (§12), and the 6 Monthly Monitoring Falsifiers (§9).
-  - `Methodology & Data`: Provenance, RPC identity probe code snippet, Honesty Ledger (Verified vs Reported), disclosed query limitations, and 10 claims removed on purpose.
-  - `Research Notebook`: 6 categorized notes (Evidence, Risk, Question) with search, filtering, and author provenance.
-  - `Changelog`: Complete audit trail of research development from v1 to v5.
-- **Standalone Offline HTML**: Includes `standalone-preview.html` (and exported `berry-thesis-redesign-export.html`), allowing zero-dependency offline exploration with fully functional tab switching.
+- **7 Dedicated Views**: Overview, On-chain Analytics (680-day BigQuery chart, 9-contract table, monthly settlements), Market Analysis, Investment Thesis (returns, scenario matrix, falsifiers, comparables), Methodology (honesty ledger, lead-lag tables), Research Notebook, Changelog.
+- **Vercel Pitch-Black Design**: Geist Sans, Geist Mono, DM Sans typography; berry-red accents (`#f2416b`).
+- **Standalone Offline HTML**: `standalone-preview.html` for zero-dependency exploration.
 
 ---
 
-## Local Setup & Reproducibility
-
-### 1. Install & Run Locally
+## Local Setup
 
 ```bash
-# Clone the repository
 git clone https://github.com/Bigestdave/berrythesis.git
 cd berrythesis
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) in your browser.
+Visit [http://localhost:3000](http://localhost:3000).
 
-### 2. BigQuery Reproduction
+### BigQuery Reproduction
 
-The 3 core queries used to extract the underlying data are located in `scripts/` and the in-app Query Library:
-- `01_stable_inflow_daily_by_contract.sql`: Queries `bigquery-public-data.crypto_near_mainnet_us.ft_events` for inbound stablecoin settlement into `intents.near`.
-- `02_daily_active_accounts_and_txs.sql`: Queries `crypto_near_mainnet_us.transactions` for active signers and daily transactions.
-- `03_daily_contract_usage.sql`: Identifies the top 25 receiver contracts by transaction volume.
+Three partition-filtered SQL queries in `scripts/` and the in-app Query Library:
+- `01_stable_inflow_daily_by_contract.sql` — stablecoin settlement into `intents.near` via `ft_events`
+- `02_daily_active_accounts_and_txs.sql` — L1 active signers and transactions
+- `03_daily_contract_usage.sql` — top 25 receiver contracts by volume
 
-### 3. RPC Identity Probe
+### RPC Identity Probe
 
-To verify that all nine contracts are genuine 6-decimal USD tokens:
+Verify all nine contracts are genuine 6-decimal USD tokens:
 ```bash
 curl -s https://archival-rpc.mainnet.near.org -H 'content-type: application/json' \
   -d '{"jsonrpc":"2.0","id":"1","method":"query","params":{
@@ -83,6 +81,10 @@ curl -s https://archival-rpc.mainnet.near.org -H 'content-type: application/json
        "account_id":"usdt.tether-token.near","method_name":"ft_metadata",
        "args_base64":"e30=","encoding":"json"}}'
 ```
+
+### Intents Explorer API
+
+Not run in this submission (requires partner JWT). BigQuery `ft_events` used instead — it covers all token types, not only 1Click swaps.
 
 ---
 

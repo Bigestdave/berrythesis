@@ -29,8 +29,8 @@ export async function getWorkspace(): Promise<Workspace> {
       },
       {
         id: "note-3",
-        title: "Permutation Lead-Lag Testing: Flow Does NOT Lead Usage or Price",
-        body: "10,000-shuffle permutation tests on BigQuery transactions confirm flow growth does not lead active accounts (monthly lag+1 r=+0.10, p=0.69; weekly p=0.44) or transactions (monthly p=0.70; weekly p=0.75). Price does no better at leading usage (smallest p=0.25). On Binance daily closes, monthly flow-vs-price lead r=-0.24 (p=0.31) and weekly r=+0.01 (p=0.89). Any backtest trading flow is fitting noise.",
+        title: "Permutation Lead-Lag Testing: No Detectable Lead From Flow",
+        body: "10,000-shuffle permutation tests on BigQuery transactions find no detectable lead from flow growth to active accounts (monthly lag+1 r=+0.10, p=0.69; weekly p=0.44) or transactions (monthly p=0.70; weekly p=0.75). Price does no better at leading usage (smallest p=0.25). On Binance daily closes, monthly flow-vs-price lead r=-0.24 (p=0.31) and weekly r=+0.01 (p=0.89). Sample sizes are small (~22 months, ~94 weeks), so this fails to detect a lead rather than proving absence.",
         category: "Evidence",
         createdAt: "2026-11-12T16:45:00.000Z",
       },
