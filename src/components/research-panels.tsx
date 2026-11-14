@@ -169,42 +169,6 @@ export function Overview({ workspace, onOpen, onNavigate, onRefresh, refreshing 
         </div>
       </section>
 
-      {/* Verified Rail Core Numbers */}
-      <div className="metric-grid" style={{ marginBottom: "20px" }}>
-        <article className="metric-card">
-          <div className="metric-label">Verified Stable Floor <ShieldCheck size={14} className="positive" /></div>
-          <div className="metric-value">$11.22B</div>
-          <div className="metric-bottom">
-            <div className="metric-context"><span>29.3% of $38.26B reported</span></div>
-            <span className="badge neutral">9 USD contracts</span>
-          </div>
-        </article>
-        <article className="metric-card">
-          <div className="metric-label">Gross Take Rate <Scale size={14} /></div>
-          <div className="metric-value">15.9 bps</div>
-          <div className="metric-bottom">
-            <div className="metric-context"><span>~$61M cumulative fees</span></div>
-            <span className="badge neutral">Half of Visa net take</span>
-          </div>
-        </article>
-        <article className="metric-card">
-          <div className="metric-label">Retained Protocol Take <TrendingUp size={14} className="positive" /></div>
-          <div className="metric-value">3.05 bps</div>
-          <div className="metric-bottom">
-            <div className="metric-context"><span>Capture: 11.5% → ~28–30%</span></div>
-            <span className="badge purple">~$11.7M net rev</span>
-          </div>
-        </article>
-        <article className="metric-card">
-          <div className="metric-label">Price-Free Activity <Activity size={14} /></div>
-          <div className="metric-value">8,622 / day</div>
-          <div className="metric-bottom">
-            <div className="metric-context"><span>Nov 1–11 (up from 4,600 Jun)</span></div>
-            <span className="badge green">Cleanest rail proxy</span>
-          </div>
-        </article>
-      </div>
-
       <div className="snapshot-header">
         <h2>Market at a glance <span className="badge neutral">USD</span></h2>
         <div>
