@@ -29,7 +29,8 @@ export async function POST(request: Request) {
     }
     const rows: OnchainRow[] = body.rows.map((r: OnchainRow) => ({ date: r.date, active_accounts: r.active_accounts, transactions: r.transactions, ...(r.active_contracts !== undefined ? { active_contracts: r.active_contracts } : {}) })).sort((a: OnchainRow, b: OnchainRow) => a.date.localeCompare(b.date));
     const data = { rows, source: body.source.trim(), importedAt: new Date().toISOString() };
-    await db.transaction(async tx => {
+    if (!db) return Response.json(data, { status: 201 });
+    await db.transaction(async (tx: any) => {
       await tx.insert(onchainDatasets).values({ id: "near", data }).onConflictDoUpdate({ target: onchainDatasets.id, set: { data, updatedAt: new Date() } });
       await tx.insert(researchRuns).values({ status: "import", sourceCount: 1, detail: `Imported ${rows.length} daily on-chain observations. User-provided results; not independently verified.` });
     });

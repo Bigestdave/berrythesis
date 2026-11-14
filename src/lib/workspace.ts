@@ -58,28 +58,28 @@ export async function getWorkspace(): Promise<Workspace> {
     ],
     runs: [
       {
-        id: 1,
+        id: "run-1",
         status: "snapshot",
         sourceCount: 5,
         detail: "Thesis v5 finalized with full Binance klines return analysis, volatility-scaled lead-lag regressions, and scenario matrix.",
         createdAt: "2026-11-14T10:00:00.000Z",
       },
       {
-        id: 2,
+        id: "run-2",
         status: "import",
         sourceCount: 1,
         detail: "Synthesized 680 days of L1 active accounts and transactions from BigQuery crypto_near_mainnet_us.transactions.",
         createdAt: "2026-11-13T16:00:00.000Z",
       },
       {
-        id: 3,
+        id: "run-3",
         status: "revision",
         sourceCount: 2,
         detail: "Reconstructed stable settlement series from ft_events ($11.22B floor, 9 confirmed contracts). Verified RPC float totals.",
         createdAt: "2026-11-12T14:30:00.000Z",
       },
       {
-        id: 4,
+        id: "run-4",
         status: "snapshot",
         sourceCount: 2,
         detail: "Market evidence captured from CoinGecko ($3.45 price, $4.52B market cap) and DefiLlama ($105M TVL).",
@@ -109,8 +109,8 @@ export async function getWorkspace(): Promise<Workspace> {
     return {
       thesis: { ...thesis, updatedAt: thesis.updatedAt.toISOString() },
       snapshot: snapshot.data,
-      notes: notes.map(note => ({ ...note, createdAt: note.createdAt.toISOString() })),
-      runs: runs.map(run => ({ ...run, createdAt: run.createdAt.toISOString() })),
+      notes: (notes as any[]).map((note: any) => ({ ...note, createdAt: note.createdAt.toISOString() })),
+      runs: (runs as any[]).map((run: any) => ({ ...run, id: String(run.id), createdAt: run.createdAt.toISOString() })),
     };
   } catch (err) {
     console.warn("Database query failed, using fallback workspace data:", err);

@@ -64,7 +64,7 @@ export default function Dashboard({ initialWorkspace, initialSection = "overview
       if (event.key === "Escape") setMobileOpen(false);
     };
     window.addEventListener("keydown", keydown);
-    return () => { window.removeEventListener("hashchange", handleHash); window.removeEventListener("popstate", handleHash); window.removeEventListener("keydown", keydown); };
+    return () => { window.removeEventListener("hashchange", handleLocation); window.removeEventListener("popstate", handleLocation); window.removeEventListener("keydown", keydown); };
   }, []);
 
   useEffect(() => { if (!toast) return; const id = setTimeout(() => setToast(null), 5000); return () => clearTimeout(id); }, [toast]);
